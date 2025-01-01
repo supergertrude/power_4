@@ -1,0 +1,52 @@
+from math import *
+from colorama import Fore, Back, Style
+l=[["_"]*7,["_"]*7,["_"]*7,["_"]*7,["_"]*7,["_"]*7,["_"]*7,]#7
+v = 1
+rep = 0
+nob = 1
+nj = "X"
+ver=["1","2","3","4","5","6","7"]
+neg = [6,5,4,3,2,1,0]
+while v!= 0 :
+    v+= 1
+    if v/2==int(v/2) :
+        nj = "X"
+    else :
+        nj = "O"
+    print("Quelle colonne,",nj,"?")
+    rep = input("--> ")
+    if rep not in ver :
+        while rep not in ver :
+            print("Quelle colonne, de 1 à 7,",nj,"?")
+            rep = input("--> ")
+    rep = int(rep)-1
+    nob =1
+    for i in range(7):
+        if nob==1 :
+            if l[i][rep]=="_":
+                l[i][rep]=nj
+                nob = 0
+    out = ""
+    for n in neg :
+        for k in l[n]:
+            out += str(k)+"|"
+        print(out)
+        out=""
+    for i in range(4) :
+        for j in range(4):
+            if l[i][j]+l[i][j+1]+l[i][j+2]+l[i][j+3]==nj*4:
+                v=0
+    for i in range(4) :
+        for j in range(4):
+            if l[i][j]+l[i+1][j]+l[i+2][j]+l[i+3][j]==nj*4:
+                v=0
+    for i in range(4) :
+        for j in range(4):
+            if l[i][j]+l[i+1][j+1]+l[i+2][j+2]+l[i+3][j+3]==nj*4:
+                v=0
+    for i in range(4) :
+        for j in range(3,7):
+            if l[i][j]+l[i+1][j-1]+l[i+2][j-2]+l[i+3][j-3]==nj*4:
+                v=0
+    if v==0:
+        print("Le joueur",nj,"gagne !")
